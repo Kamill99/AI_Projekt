@@ -88,25 +88,31 @@
             fetch('http://localhost:8080/companies')
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     for(let i = 0; i < data.length; i++){
+                        companyId = data[i].id
                         let employeeName = '';
                         if(data[i].listOfEmployees) {
                             for(let j = 0; j < data[i].listOfEmployees.length; j++)
                             employeeName = data[i].listOfEmployees[j]?.name + ' ' + data[i].listOfEmployees[j]?.secondName
-                            console.log(employeeName)
                         }
                         let row = `<tr>
                                         <td>${data[i].name}</td>
                                         <td>${data[i].city}</td>
                                         <td>${data[i].industryType}</td>
                                         <td>${employeeName}</td>
-                                        <td><button class="btn btn-danger bi bi-trash"></button></td>
+                                        <td><button class="btn btn-danger bi bi-trash" onclick="deleteCompany(companyId)"></button></td>
                                     </tr>`
                         table.innerHTML += row
                     }
                 })
                 .catch(error => console.log(error))
+            function deleteCompany(id) {
+                let choice = confirm("Are you sure you want to delete the company?");
+                if (choice === true) {
+                    fetch("http://localhost:8080/companies/" + id, { method: "DELETE" });
+                    document.location.reload();
+                }
+            }
         </script>
     </body>
 </html>
