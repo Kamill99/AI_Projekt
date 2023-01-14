@@ -1,136 +1,124 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <meta charset="UTF-8">
-    <title>Employee management</title>
-</head>
-<body>
-<div class="bg-white row m-0">
-    <div class="col-2">
-        <a href="../index.html"><button class="btn btn-lg bi bi-arrow-left m-3"></button></a>
-    </div>
-    <div class="col-8">
-        <h1 class="text-center m-3">Employee management</h1>
-    </div>
-    <div class="col-2">
-        <button class="btn btn-success bi bi-plus m-4" data-toggle="modal" data-target="#addModal"></button>
-    </div>
-</div>
-<table class="table table-striped bg-white">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Second name</th>
-        <th scope="col">E-mail</th>
-        <th scope="col">Salary</th>
-        <th scope="col">Position</th>
-        <th scope="col">Companies</th>
-        <th scope="col">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td><button class="btn btn-info" data-toggle="modal" data-target="#editModal">Arkadiusz</button></td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td><button class="btn btn-danger bi bi-trash"></button></td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td><button class="btn btn-info" data-toggle="modal" data-target="#editModal">Kacper</button></td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>@fat</td>
-        <td>@fat</td>
-        <td>@fat</td>
-        <td><button class="btn btn-danger bi bi-trash"></button></td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td><button class="btn btn-info" data-toggle="modal" data-target="#editModal">Kamil</button></td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-        <td><button class="btn btn-danger bi bi-trash"></button></td>
-    </tr>
-    </tbody>
-</table>
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="editModalLabel">Edit employer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+        <meta charset="UTF-8">
+        <title>Employee management</title>
+    </head>
+    <body>
+        <div class="bg-white row m-0">
+            <div class="col-2">
+                <a href="../index.html"><button class="btn btn-lg bi bi-arrow-left m-3"></button></a>
             </div>
-            <div class="modal-body text-center m-2">
-                <label for="validationDefault01">Name</label>
-                <input type="text" class="form-control text-center mb-4" id="validationDefault01" placeholder="Name" required>
-                <label for="validationDefault02">Second name</label>
-                <input type="text" class="form-control text-center mb-4" id="validationDefault02" placeholder="Second name" required>
-                <label for="validationDefault03">E-mail</label>
-                <input type="text" class="form-control text-center mb-4" id="validationDefault03" placeholder="E-mail" required>
-                <label for="validationDefault04">Salary</label>
-                <input type="text" class="form-control text-center mb-4" id="validationDefault04" placeholder="Salary" required>
-                <label for="validationDefault05">Position</label>
-                <input type="text" class="form-control text-center mb-4" id="validationDefault05" placeholder="Position" required>
+            <div class="col-8">
+                <h1 class="text-center m-3">Employee management</h1>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="col-2">
+                <button class="btn btn-success bi bi-plus m-4" data-toggle="modal" data-target="#addModal"></button>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="addModalLabel">Add employer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center m-2">
-                <label for="validation01">Name</label>
-                <input type="text" class="form-control text-center mb-4" id="validation01" placeholder="Name" required>
-                <label for="validation02">Second name</label>
-                <input type="text" class="form-control text-center mb-4" id="validation02" placeholder="Second name" required>
-                <label for="validation03">E-mail</label>
-                <input type="text" class="form-control text-center mb-4" id="validation03" placeholder="E-mail" required>
-                <label for="validation04">Salary</label>
-                <input type="text" class="form-control text-center mb-4" id="validation04" placeholder="Salary" required>
-                <label for="validation05">Position</label>
-                <input type="text" class="form-control text-center mb-4" id="validation05" placeholder="Position" required>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+        <table id="employee" class="table table-striped bg-white">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Second name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Position</th>
+                <th scope="col">Companies</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+        </table>
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="editModalLabel">Edit employer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center m-2">
+                        <label for="validationDefault01">Name</label>
+                        <input type="text" class="form-control text-center mb-4" id="validationDefault01" placeholder="Name" required>
+                        <label for="validationDefault02">Second name</label>
+                        <input type="text" class="form-control text-center mb-4" id="validationDefault02" placeholder="Second name" required>
+                        <label for="validationDefault03">E-mail</label>
+                        <input type="text" class="form-control text-center mb-4" id="validationDefault03" placeholder="E-mail" required>
+                        <label for="validationDefault04">Salary</label>
+                        <input type="text" class="form-control text-center mb-4" id="validationDefault04" placeholder="Salary" required>
+                        <label for="validationDefault05">Position</label>
+                        <input type="text" class="form-control text-center mb-4" id="validationDefault05" placeholder="Position" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-</body>
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="addModalLabel">Add employer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center m-2">
+                        <label for="validation01">Name</label>
+                        <input type="text" class="form-control text-center mb-4" id="validation01" placeholder="Name" required>
+                        <label for="validation02">Second name</label>
+                        <input type="text" class="form-control text-center mb-4" id="validation02" placeholder="Second name" required>
+                        <label for="validation03">E-mail</label>
+                        <input type="text" class="form-control text-center mb-4" id="validation03" placeholder="E-mail" required>
+                        <label for="validation04">Salary</label>
+                        <input type="text" class="form-control text-center mb-4" id="validation04" placeholder="Salary" required>
+                        <label for="validation05">Position</label>
+                        <input type="text" class="form-control text-center mb-4" id="validation05" placeholder="Position" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let table = document.getElementById('employee')
+            fetch('http://localhost:8080/employees')
+                .then(res => res.json())
+                .then(data => {
+                    for(let i = 0; i < data.length; i++){
+                        let row = `<tr>
+                                        <td>${data[i].name}</td>
+                                        <td>${data[i].secondName}</td>
+                                        <td>${data[i].email}</td>
+                                        <td>${data[i].salary}</td>
+                                        <td>${data[i].role}</td>
+                                        <td>${data[i].listOfCompanies}</td>
+                                        <td><button class="btn btn-danger bi bi-trash"></button></td>
+                                    </tr>`
+                        table.innerHTML += row
+                    }
+                })
+                .catch(error => console.log(error))
+        </script>
+    </body>
 </html>
