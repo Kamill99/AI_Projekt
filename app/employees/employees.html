@@ -81,28 +81,37 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body text-center m-2">
-                        <label for="validation01">Name</label>
-                        <input type="text" class="form-control text-center mb-4" id="validation01" placeholder="Name" required>
-                        <label for="validation02">Second name</label>
-                        <input type="text" class="form-control text-center mb-4" id="validation02" placeholder="Second name" required>
-                        <label for="validation03">E-mail</label>
-                        <input type="text" class="form-control text-center mb-4" id="validation03" placeholder="E-mail" required>
-                        <label for="validation04">Salary</label>
-                        <input type="text" class="form-control text-center mb-4" id="validation04" placeholder="Salary" required>
-                        <label for="validation05">Position</label>
-                        <input type="text" class="form-control text-center mb-4" id="validation05" placeholder="Position" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+
+                    <form class="addForm">
+                        <div class="modal-body text-center m-2">
+                            <label for="validation01">Name</label>
+                            <input name="name" type="text" class="form-control text-center mb-4" id="validation01" placeholder="Name" required>
+                            <label for="validation02">Second name</label>
+                            <input name="secondName" type="text" class="form-control text-center mb-4" id="validation02" placeholder="Second name" required>
+                            <label for="validation03">E-mail</label>
+                            <input name="email" type="text" class="form-control text-center mb-4" id="validation03" placeholder="E-mail" required>
+                            <label for="validation04">Salary</label>
+                            <input name="salary" type="number" class="form-control text-center mb-4" id="validation04" placeholder="Salary" required>
+                            <label for="validation05">Position</label>
+                            <select name="jobPosition" type="text" class="form-control text-center mb-4" id="validation05" required>
+                                <option value="manager">Kierownik</option>
+                                <option value="programmer">Programista</option>
+                                <option value="accountant">Księgowy</option>
+                                <option value="cleaner">Sprzątacz</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
         <script>
             let table = document.getElementById('employee')
-            let email
+            let email;
             fetch('http://localhost:8080/employees')
                 .then(res => res.json())
                 .then(data => {
@@ -113,7 +122,7 @@
                                         <td>${data[i].secondName}</td>
                                         <td>${data[i].email}</td>
                                         <td>${data[i].salary}</td>
-                                        <td>${data[i].role}</td>
+                                        <td>${data[i].jobPosition}</td>
                                         <td>${data[i].listOfCompanies}</td>
                                         <td><button class="btn btn-danger bi bi-trash"
                                         onclick="deleteEmployee(email)"></button></td>
@@ -122,6 +131,7 @@
                     }
                 })
                 .catch(error => console.log(error))
+
             function deleteEmployee(email) {
                 let choice = confirm("Are you sure you want to delete the employee?");
                 if (choice === true) {
@@ -129,6 +139,25 @@
                     document.location.reload();
                 }
             }
+
+            const addEmployee = document.querySelector('.addForm');
+            addEmployee.addEventListener('submit', event => {
+                event.preventDefault();
+
+                const formData = new FormData(addEmployee);
+                const data = Object.fromEntries(formData);
+                data.salary = parseFloat(data.salary)
+
+                fetch('http://localhost:8080/employees', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.log(error))
+            })
         </script>
     </body>
 </html>
