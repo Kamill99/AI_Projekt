@@ -1,0 +1,17 @@
+body {
+    background: url("https://cdn.pixabay.com/photo/2019/09/25/19/13/building-4504413_960_720.jpg") no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.content {
+    background: #0d6efd;
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    opacity: 80%;
+}
