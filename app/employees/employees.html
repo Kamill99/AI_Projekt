@@ -19,7 +19,7 @@
     <body>
         <div class="bg-white row m-0">
             <div class="col-2">
-                <a href="../index.html"><button class="btn btn-lg bi bi-arrow-left m-3"></button></a>
+                <a href="../home/home.html"><button class="btn btn-lg bi bi-arrow-left m-3"></button></a>
             </div>
             <div class="col-8">
                 <h1 class="text-center m-3">Employee management</h1>
@@ -124,8 +124,8 @@
                                         <td>${data[i].salary}</td>
                                         <td>${data[i].jobPosition}</td>
                                         <td>${data[i].listOfCompanies}</td>
-                                        <td><button class="btn btn-danger bi bi-trash"
-                                        onclick="deleteEmployee(email)"></button></td>
+                                        <td><button value=${data[i].email} class="btn btn-danger bi bi-trash"
+                                        onclick="() => deleteEmployee(email)"></button></td>
                                     </tr>`
                         table.innerHTML += row
                     }
@@ -133,6 +133,7 @@
                 .catch(error => console.log(error))
 
             function deleteEmployee(email) {
+                console.log(email)
                 let choice = confirm("Are you sure you want to delete the employee?");
                 if (choice === true) {
                     fetch("http://localhost:8080/employees/" + email, { method: "DELETE" });
