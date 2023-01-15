@@ -124,8 +124,8 @@
                                         <td>${data[i].salary}</td>
                                         <td>${data[i].jobPosition}</td>
                                         <td>${data[i].listOfCompanies}</td>
-                                        <td><button value=${data[i].email} class="btn btn-danger bi bi-trash"
-                                        onclick="() => deleteEmployee(email)"></button></td>
+                                        <td><button class="btn btn-danger bi bi-trash"
+                                        onclick="deleteEmployee(email)"></button></td>
                                     </tr>`
                         table.innerHTML += row
                     }
