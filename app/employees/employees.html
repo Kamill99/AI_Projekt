@@ -133,7 +133,6 @@
                 .catch(error => console.log(error))
 
             function deleteEmployee(email) {
-                console.log(email)
                 let choice = confirm("Are you sure you want to delete the employee?");
                 if (choice === true) {
                     fetch("http://localhost:8080/employees/" + email, { method: "DELETE" });
