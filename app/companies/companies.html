@@ -89,7 +89,14 @@
         </div>
         <script>
             let table = document.getElementById('companies')
-            fetch('http://localhost:8080/companies')
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", localStorage.getItem('token'));
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            fetch('http://localhost:8080/companies', requestOptions)
                 .then(res => res.json())
                 .then(data => {
                     for(let i = 0; i < data.length; i++){

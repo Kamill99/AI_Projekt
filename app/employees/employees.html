@@ -111,7 +111,15 @@
         </div>
         <script>
             let table = document.getElementById('employee')
-            fetch('http://localhost:8080/employees')
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", localStorage.getItem('token'));
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            fetch('http://localhost:8080/employees',requestOptions)
+
                 .then(res => res.json())
                 .then(data => {
                     for(let i = 0; i < data.length; i++){

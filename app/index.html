@@ -50,6 +50,7 @@
         fetch(login, {
             method: "POST",
             headers: {
+                "Authorization": localStorage.getItem('token'),
                 Accept: "application/json, text/plain, */*",
                 "Content-Type": "application/json",
             },
