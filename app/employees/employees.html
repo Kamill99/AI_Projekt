@@ -1,130 +1,147 @@
 <!DOCTYPE html>
 <html lang="pl">
-    <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-        </script>
-        <meta charset="UTF-8">
-        <title>Employee management</title>
-    </head>
-    <body>
-        <div class="bg-white row m-0">
-            <div class="col-2">
-                <a href="../home/home.html"><button class="btn btn-lg bi bi-arrow-left m-3"></button></a>
-            </div>
-            <div class="col-8">
-                <h1 class="text-center m-3">Employee management</h1>
-            </div>
-            <div class="col-2">
-                <button class="btn btn-success bi bi-plus m-4" data-toggle="modal" data-target="#addModal"></button>
-            </div>
-        </div>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <meta charset="UTF-8">
+    <title>Employee management</title>
+</head>
+<body>
+<div class="bg-white row m-0">
+    <div class="col-2">
+        <a href="../home/home.html">
+            <button class="btn btn-lg bi bi-arrow-left m-3"></button>
+        </a>
+    </div>
+    <div class="col-8">
+        <h1 class="text-center m-3">Employee management</h1>
+    </div>
+    <div class="col-2">
+        <button class="btn btn-success bi bi-plus m-4" data-toggle="modal" data-target="#addModal"></button>
+    </div>
+</div>
 
-        <table id="employee" class="table table-striped bg-white">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Second name</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Salary</th>
-                <th scope="col">Position</th>
-                <th scope="col">Companies</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-        </table>
+<table id="employee" class="table table-striped bg-white text-center">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Second name</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Position</th>
+        <th scope="col">Companies</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+</table>
 
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center" id="editModalLabel">Edit employer</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center m-2">
-                        <label for="validationDefault01">Name</label>
-                        <input type="text" class="form-control text-center mb-4" id="validationDefault01" placeholder="Name" required>
-                        <label for="validationDefault02">Second name</label>
-                        <input type="text" class="form-control text-center mb-4" id="validationDefault02" placeholder="Second name" required>
-                        <label for="validationDefault03">E-mail</label>
-                        <input type="text" class="form-control text-center mb-4" id="validationDefault03" placeholder="E-mail" required>
-                        <label for="validationDefault04">Salary</label>
-                        <input type="text" class="form-control text-center mb-4" id="validationDefault04" placeholder="Salary" required>
-                        <label for="validationDefault05">Position</label>
-                        <input type="text" class="form-control text-center mb-4" id="validationDefault05" placeholder="Position" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="editModalLabel">Edit employer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="editForm">
+                <div class="modal-body text-center m-2" id="editEmployeeDiv">
+                    <label for="validationDefault05">Position</label>
+                    <select name="jobPositionId" type="text" class="form-control text-center mb-4"
+                            id="validationDefault05"
+                            required>
+                    </select>
+                    <!--                    <label for="validationDefault01">Name</label>-->
+                    <!--                    <input type="text" class="form-control text-center mb-4" id="validationDefault01" placeholder="Name"-->
+                    <!--                           required>-->
+                    <!--                    <label for="validationDefault02">Second name</label>-->
+                    <!--                    <input type="text" class="form-control text-center mb-4" id="validationDefault02"-->
+                    <!--                           placeholder="Second name" required>-->
+                    <!--                    <label for="validationDefault03">E-mail</label>-->
+                    <!--                    <input type="text" class="form-control text-center mb-4" id="validationDefault03"-->
+                    <!--                           placeholder="E-mail"-->
+                    <!--                           required>-->
+                    <!--                    <label for="validationDefault04">Salary</label>-->
+                    <!--                    <input type="text" class="form-control text-center mb-4" id="validationDefault04"-->
+                    <!--                           placeholder="Salary"-->
+                    <!--                           required>-->
+                    <!--                    <label for="validationDefault05">Position</label>-->
+                    <!--                    <input type="text" class="form-control text-center mb-4" id="validationDefault05"-->
+                    <!--                           placeholder="Position"-->
+                    <!--                           required>-->
                 </div>
-            </div>
+            </form>
+
+
         </div>
+    </div>
+</div>
 
-        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center" id="addModalLabel">Add employer</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="addModalLabel">Add employer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                    <form class="addForm">
-                        <div class="modal-body text-center m-2">
-                            <label for="validation01">Name</label>
-                            <input name="name" type="text" class="form-control text-center mb-4" id="validation01" placeholder="Name" required>
-                            <label for="validation02">Second name</label>
-                            <input name="secondName" type="text" class="form-control text-center mb-4" id="validation02" placeholder="Second name" required>
-                            <label for="validation03">E-mail</label>
-                            <input name="email" type="text" class="form-control text-center mb-4" id="validation03" placeholder="E-mail" required>
-                            <label for="validation04">Salary</label>
-                            <input name="salary" type="number" class="form-control text-center mb-4" id="validation04" placeholder="Salary" required>
-                            <label for="validation05">Position</label>
-                            <select name="jobPosition" type="text" class="form-control text-center mb-4" id="validation05" required>
-                                <option value="manager">Kierownik</option>
-                                <option value="programmer">Programista</option>
-                                <option value="accountant">Księgowy</option>
-                                <option value="cleaner">Sprzątacz</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-
+            <form class="addForm">
+                <div class="modal-body text-center m-2">
+                    <label for="validation01">Name</label>
+                    <input name="name" type="text" class="form-control text-center mb-4" id="validation01"
+                           placeholder="Name" required>
+                    <label for="validation02">Second name</label>
+                    <input name="secondName" type="text" class="form-control text-center mb-4" id="validation02"
+                           placeholder="Second name" required>
+                    <label for="validation03">E-mail</label>
+                    <input name="email" type="email" class="form-control text-center mb-4" id="validation03"
+                           placeholder="E-mail" required>
+                    <label for="validation04">Salary</label>
+                    <input name="salary" min="1" type="number" class="form-control text-center mb-4" id="validation04"
+                           placeholder="Salary" required>
+                    <label for="validation05">Position</label>
+                    <select name="jobPositionId" type="text" class="form-control text-center mb-4" id="validation05"
+                            required>
+                    </select>
                 </div>
-            </div>
-        </div>
-        <script>
-            let table = document.getElementById('employee')
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", localStorage.getItem('token'));
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                redirect: 'follow'
-            };
-            fetch('http://localhost:8080/employees',requestOptions)
+                <div class="modal-footer">
+                    <button type="button" onclick="refresh()" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
 
-                .then(res => res.json())
-                .then(data => {
-                    for(let i = 0; i < data.length; i++){
-                        let row = `<tr>
-                                        <td>${data[i].name}</td>
+        </div>
+    </div>
+</div>
+<script>
+
+    let table = document.getElementById('employee')
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", localStorage.getItem('token'));
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+    fetch('http://localhost:8080/employees', requestOptions)
+        .then(res => res.json())
+        .then(data => {
+            for (let i = 0; i < data.length; i++) {
+                let row = `<tr>
+                                        <td><button data-toggle="modal" data-target="#editModal" onclick="getSingleEmployee('${data[i].id}')" class="btn btn-primary" style="width: 80%">${data[i].name}</button></td>
                                         <td>${data[i].secondName}</td>
                                         <td>${data[i].email}</td>
                                         <td>${data[i].salary}</td>
@@ -133,38 +150,165 @@
                                         <td><button class="btn btn-danger bi bi-trash"
                                         onclick="deleteEmployee('${data[i].email}')"></button></td>
                                     </tr>`
-                        table.innerHTML += row
-                    }
-                })
-                .catch(error => console.log(error))
-
-            function deleteEmployee(email) {
-                console.log(email)
-                let choice = confirm("Are you sure you want to delete the employee?");
-                if (choice === true) {
-                    fetch("http://localhost:8080/employees/" + email, { method: "DELETE" });
-                    document.location.reload();
-                }
+                table.innerHTML += row
             }
+        })
+        .catch(error => console.log(error))
 
-            const addEmployee = document.querySelector('.addForm');
-            addEmployee.addEventListener('submit', event => {
-                event.preventDefault();
+    function deleteEmployee(email) {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", localStorage.getItem('token'));
+        var requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        console.log(email)
+        let choice = confirm("Are you sure you want to delete the employee?");
+        if (choice === true) {
+            fetch("http://localhost:8080/employees/" + email, requestOptions);
+            document.location.reload();
+        }
+    }
 
-                const formData = new FormData(addEmployee);
-                const data = Object.fromEntries(formData);
-                data.salary = parseFloat(data.salary)
+    function refresh() {
+        document.location.reload();
+    }
 
-                fetch('http://localhost:8080/employees', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                }).then(res => res.json())
-                    .then(data => console.log(data))
-                    .catch(error => console.log(error))
+    function getJobPosition() {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", localStorage.getItem('token'));
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let select = document.getElementById('validation05')
+        fetch('http://localhost:8080/job-positions', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    let row = `<option value="${data[i].id}">${data[i].name}</option>`
+                    select.innerHTML += row
+                }
             })
-        </script>
-    </body>
+            .catch(error => console.log(error))
+
+    }
+
+    function getJobPositionById() {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", localStorage.getItem('token'));
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let select = document.getElementById('validationDefault05')
+        fetch('http://localhost:8080/job-positions', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    let row = `<option value="${data[i].id}">${data[i].name}</option>`
+                    select.innerHTML += row
+                }
+            })
+            .catch(error => console.log(error))
+
+    }
+
+    function getSingleEmployee(id) {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", localStorage.getItem('token'));
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let editEmployeeDiv = document.getElementById('editEmployeeDiv')
+        getJobPositionById()
+        fetch('http://localhost:8080/employees/' + id, requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                let row = `<label for="validationDefault01">Name</label>
+                    <input name="name" value="${data.name}" type="text"  class="form-control text-center mb-4" id="validationDefault01"
+                           placeholder="Name" required>
+                    <label for="validationDefault02">Second name</label>
+                    <input name="secondName" value="${data.secondName}" type="text" class="form-control text-center mb-4" id="validationDefault02"
+                           placeholder="Second name" required>
+                    <label for="validationDefault03">E-mail</label>
+                    <input name="email" value="${data.email}" type="email" class="form-control text-center mb-4" id="validationDefault03"
+                           placeholder="E-mail" required>
+                    <label for="validationDefault04">Salary</label>
+                    <input name="salary" value="${data.salary}" min="1" type="number" class="form-control text-center mb-4" id="validationDefault04"
+                           placeholder="Salary" required>
+                    <button type="button" onclick="refresh()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="editEmployees('${data.id}', '${data.email}')" class="btn btn-primary">Save changes</button>
+                    `
+                editEmployeeDiv.innerHTML += row
+            })
+            .catch(error => console.log(error))
+    }
+
+    const addEmployee = document.querySelector('.addForm');
+    getJobPosition()
+    addEmployee.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const formData = new FormData(addEmployee);
+        const data = Object.fromEntries(formData);
+        data.salary = parseFloat(data.salary)
+
+        fetch('http://localhost:8080/employees', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem('token')
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+        document.location.reload();
+    })
+
+    function editEmployees(id, email) {
+        let idid = id
+        let name = $('#validationDefault01').val();
+        let secondName = $('#validationDefault02').val();
+        let emailEmployee = $('#validationDefault03').val();
+        let salary = $('#validationDefault04').val();
+        let position = $('#validationDefault05').val();
+
+        jsonObject = {
+            "id": "",
+            "name": "",
+            "secondName": "",
+            "email": "",
+            "salary": "",
+            "position": ""
+        }
+
+        jsonObject.id = idid;
+        jsonObject.name = name;
+        jsonObject.secondName = secondName;
+        jsonObject.email = emailEmployee;
+        jsonObject.salary = salary;
+        jsonObject.jobPositionId = position;
+        console.log(jsonObject)
+        fetch('http://localhost:8080/employees/' + email, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem('token')
+            },
+            body: JSON.stringify(jsonObject)
+        }).then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+
+        document.location.reload();
+    }
+</script>
+</body>
 </html>
