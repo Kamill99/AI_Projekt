@@ -102,7 +102,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <from class="addPersonForm">
+            <form class="addPersonForm">
                 <div class="modal-body text-center m-2" id="addPersonDiv">
                     <div class="m-3">
                         <select name="employee" id="addPersonSelect">
@@ -113,7 +113,33 @@
 
                     </div>
                 </div>
-            </from>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePerson" tabindex="-1" role="dialog" aria-labelledby="deletePersonModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="deletePersonModalLabel">Select Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="deletePersonForm">
+                <div class="modal-body text-center m-2" id="deltePersonDiv">
+                    <div class="m-3">
+                        <select name="employee" id="deletePersonSelect">
+
+                        </select>
+                    </div>
+                    <div id="deleteButtons">
+
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -145,7 +171,7 @@
                                         <td>${data[i].industryType}</td>
                                         <td>${employeeName}</td>
                                         <td><button class="btn btn-success bi bi-person" data-toggle="modal" data-target="#addPerson" onclick="getEmployees('${data[i].id}')"></button></td>
-                                        <td><button class="btn btn-warning bi bi-person"></button></td>
+                                        <td><button class="btn btn-warning bi bi-person" data-toggle="modal" data-target="#deletePerson" onclick="getEmployees2('${data[i].id}')"></button></td>
                                         <td><button class="btn btn-danger bi bi-trash" onclick="deleteCompany('${data[i].id}')"></button></td>
                                     </tr>`
                 table.innerHTML += row
@@ -274,24 +300,66 @@
 
     }
 
+    function getEmployees2(id) {
+        idCompany = id
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", localStorage.getItem('token'));
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let select = document.getElementById('deletePersonSelect')
+        let buttons = document.getElementById('deleteButtons')
+        fetch('http://localhost:8080/employees', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    let row = `<option value="${data[i].email}">${data[i].name} ${data[i].secondName} </option>`
+                    select.innerHTML += row
+                }
+                let addButtons = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" onclick="deletePerson('${data[0].email}')" class="btn btn-primary">Save changes</button>`
+                buttons.innerHTML += addButtons
+            })
+
+    }
+
     function addPerson(email) {
-        console.log('asdasdasd')
-        console.log(email)
-        emailPerson = email
-        console.log('http://localhost:8080/companies/' + idCompany + '/employees/' + emailPerson)
+        console.log('http://localhost:8080/companies/' + idCompany + '/employees/' + email)
         const addPerson = document.querySelector('.addPersonForm');
         addPerson.addEventListener('submit', event => {
             event.preventDefault();
             const formData = new FormData(addPerson);
             const data = Object.fromEntries(formData);
 
-            fetch('http://localhost:8080/companies/' + idCompany + '/employees/' + emailPerson, {
+            fetch('http://localhost:8080/companies/' + idCompany + '/employees/' + email, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     "Authorization": localStorage.getItem('token')
                 },
-                body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+            document.location.reload();
+        })
+    }
+
+    function deletePerson(email) {
+        console.log('http://localhost:8080/companies/' + idCompany + '/employees/' + email)
+        const deletePerson = document.querySelector('.deletePersonForm');
+        deletePerson.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(deletePerson);
+            const data = Object.fromEntries(formData);
+
+            fetch('http://localhost:8080/companies/' + idCompany + '/employees/' + email, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": localStorage.getItem('token')
+                },
             }).then(res => res.json())
                 .then(data => console.log(data))
                 .catch(error => console.log(error))
