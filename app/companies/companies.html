@@ -37,6 +37,8 @@
         <th scope="col">City</th>
         <th scope="col">Industry type</th>
         <th scope="col">Employee</th>
+        <th scope="col">Add employee</th>
+        <th scope="col">Delete employee</th>
         <th scope="col">Delete</th>
     </tr>
     </thead>
@@ -90,7 +92,35 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="addPerson" tabindex="-1" role="dialog" aria-labelledby="addPersonModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="addPersonModalLabel">Select Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <from class="addPersonForm">
+                <div class="modal-body text-center m-2" id="addPersonDiv">
+                    <div class="m-3">
+                        <select name="employee" id="addPersonSelect">
+
+                        </select>
+                    </div>
+                    <div id="addButtons">
+
+                    </div>
+                </div>
+            </from>
+        </div>
+    </div>
+</div>
 <script>
+    let idCompany
+    let emailPerson
+
     let table = document.getElementById('companies')
     var myHeaders = new Headers();
     myHeaders.append("Authorization", localStorage.getItem('token'));
@@ -114,12 +144,18 @@
                                         <td>${data[i].city}</td>
                                         <td>${data[i].industryType}</td>
                                         <td>${employeeName}</td>
+                                        <td><button class="btn btn-success bi bi-person" data-toggle="modal" data-target="#addPerson" onclick="getEmployees('${data[i].id}')"></button></td>
+                                        <td><button class="btn btn-warning bi bi-person"></button></td>
                                         <td><button class="btn btn-danger bi bi-trash" onclick="deleteCompany('${data[i].id}')"></button></td>
                                     </tr>`
                 table.innerHTML += row
             }
         })
         .catch(error => console.log(error))
+
+    function refresh() {
+        document.location.reload();
+    }
 
     function deleteCompany(id) {
         var myHeaders = new Headers();
@@ -211,6 +247,96 @@
 
         document.location.reload();
     }
+
+
+    function getEmployees(id) {
+        idCompany = id
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", localStorage.getItem('token'));
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let select = document.getElementById('addPersonSelect')
+        let buttons = document.getElementById('addButtons')
+        fetch('http://localhost:8080/employees', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    let row = `<option value="${data[i].email}">${data[i].name} ${data[i].secondName} </option>`
+                    select.innerHTML += row
+                }
+                let addButtons = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" onclick="addPerson('${data[0].email}')" class="btn btn-primary">Save changes</button>`
+                buttons.innerHTML += addButtons
+            })
+
+    }
+
+    function addPerson(email) {
+        console.log('asdasdasd')
+        console.log(email)
+        emailPerson = email
+        console.log('http://localhost:8080/companies/' + idCompany + '/employees/' + emailPerson)
+        const addPerson = document.querySelector('.addPersonForm');
+        addPerson.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(addPerson);
+            const data = Object.fromEntries(formData);
+
+            fetch('http://localhost:8080/companies/' + idCompany + '/employees/' + emailPerson, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": localStorage.getItem('token')
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+            document.location.reload();
+        })
+    }
+
+
+    // function getSingleCompany(id) {
+    //     var myHeaders = new Headers();
+    //     myHeaders.append("Authorization", localStorage.getItem('token'));
+    //     var requestOptions = {
+    //         method: 'GET',
+    //         headers: myHeaders,
+    //         redirect: 'follow'
+    //     };
+    //     let editCompanyDiv = document.getElementById('editCompanyDiv')
+    //     fetch('http://localhost:8080/companies/' + id, requestOptions)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             let row = ``
+    //             editCompanyDiv.innerHTML += row
+    //         })
+    //         .catch(error => console.log(error))
+    // }
+
+    // const addPerson = document.querySelector('.addPersonForm');
+    // addPerson.addEventListener('submit', event => {
+    //     event.preventDefault();
+    //     const formData = new FormData(addCompanies);
+    //     const data = Object.fromEntries(formData);
+    //     data.salary = parseFloat(data.salary)
+    //
+    //     fetch('http://localhost:8080//', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             "Authorization": localStorage.getItem('token')
+    //         },
+    //         body: JSON.stringify(data)
+    //     }).then(res => res.json())
+    //         .then(data => console.log(data))
+    //         .catch(error => console.log(error))
+    //     document.location.reload();
+    // })
 </script>
 </body>
 </html>
