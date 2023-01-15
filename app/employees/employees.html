@@ -111,12 +111,10 @@
         </div>
         <script>
             let table = document.getElementById('employee')
-            let email;
             fetch('http://localhost:8080/employees')
                 .then(res => res.json())
                 .then(data => {
                     for(let i = 0; i < data.length; i++){
-                        email = data[i].email
                         let row = `<tr>
                                         <td>${data[i].name}</td>
                                         <td>${data[i].secondName}</td>
@@ -125,7 +123,7 @@
                                         <td>${data[i].jobPosition}</td>
                                         <td>${data[i].listOfCompanies}</td>
                                         <td><button class="btn btn-danger bi bi-trash"
-                                        onclick="deleteEmployee(email)"></button></td>
+                                        onclick="deleteEmployee('${data[i].email}')"></button></td>
                                     </tr>`
                         table.innerHTML += row
                     }
@@ -133,6 +131,7 @@
                 .catch(error => console.log(error))
 
             function deleteEmployee(email) {
+                console.log(email)
                 let choice = confirm("Are you sure you want to delete the employee?");
                 if (choice === true) {
                     fetch("http://localhost:8080/employees/" + email, { method: "DELETE" });

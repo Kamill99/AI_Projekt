@@ -104,7 +104,7 @@
                                         <td>${data[i].city}</td>
                                         <td>${data[i].industryType}</td>
                                         <td>${employeeName}</td>
-                                        <td><button class="btn btn-danger bi bi-trash" onclick="deleteCompany(companyId)"></button></td>
+                                        <td><button class="btn btn-danger bi bi-trash" onclick="deleteCompany('${data[i].id}')"></button></td>
                                     </tr>`
                         table.innerHTML += row
                     }
